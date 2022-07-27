@@ -19,7 +19,7 @@
 @endif
 <div class="w-100 pt-5 login-body">
     <div class="row justify-content-center w-100 mt-5">
-        <div class="col-lg-4 col-md-6 col-sm-11">
+        <div class="col-lg-8 col-md-8 col-sm-11">
             <div class="card">
                 <div class="card-body">
                     <img src="{{ asset('/assets/icon/logo.png') }}" class="w-100 login-icon mb-3"/>

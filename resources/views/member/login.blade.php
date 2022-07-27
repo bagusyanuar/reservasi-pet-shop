@@ -18,33 +18,39 @@
         Swal.fire("Gagal", '{{\Illuminate\Support\Facades\Session::get('failed')}}', "error")
     </script>
 @endif
-<div class="w-100 pt-5 login-body">
+<div class="w-100 pt-3 login-body">
     <div class="row justify-content-center w-100 mt-5">
-        <div class="col-lg-3 col-md-6 col-sm-11">
+        <div class="col-lg-8 col-md-8 col-sm-11">
             <div class="card">
-                <div class="card-body">
-                    <img src="{{ asset('/assets/icon/logo.png') }}" class="w-100 login-icon mb-3"/>
-                    <p class="f-bold mb-2 text-center" style="font-size: 18px">Silahkan Login</p>
-                    <form method="post">
-                        @csrf
-                        <div class="w-100 mb-1">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" placeholder="Username"
-                                   name="username">
-                        </div>
-                        <div class="w-100 mb-4">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Password"
-                                   name="password">
-                        </div>
-                        <div class="w-100 mb-2 mt-3">
-                            <button type="submit" class="btn btn-primary w-100">Login</button>
-                        </div>
-                        <div class="w-100" style="text-align: end">
-                            <a class="text-right" href="/register">Belum Punya Akun?</a>
+                <div class="row">
+                    <div class="col-lg-7 col-md-6">
+                        <img src="{{ asset('/assets/icon/logo-pet-shop.jpg') }}" class="w-100"/>
+                    </div>
+                    <div class="col-lg-5 col-md-6">
+                        <div style="padding-right: 20px; padding-top: 100px;">
+                            <p class="f-bold mb-2 text-center" style="font-size: 18px">Silahkan Login</p>
+                            <form method="post">
+                                @csrf
+                                <div class="w-100 mb-1">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="username" placeholder="Username"
+                                           name="username">
+                                </div>
+                                <div class="w-100 mb-4">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" placeholder="Password"
+                                           name="password">
+                                </div>
+                                <div class="w-100 mb-2 mt-3">
+                                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                                </div>
+                                <div class="w-100" style="text-align: end">
+                                    <a class="text-right" href="/register">Belum Punya Akun?</a>
+                                </div>
+                            </form>
                         </div>
 
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

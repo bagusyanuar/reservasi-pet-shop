@@ -12,9 +12,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::match(['post', 'get'],'/', [\App\Http\Controllers\AuthController::class, 'login_member']);
-//Route::match(['post', 'get'], '/login-member', [\App\Http\Controllers\AuthController::class, 'login_member']);
-//Route::match(['post', 'get'], '/register', [\App\Http\Controllers\AuthController::class, 'register']);
+Route::get('/', [\App\Http\Controllers\Member\HomepageController::class, 'index']);
+//Route::match(['post', 'get'],'/', [\App\Http\Controllers\AuthController::class, 'login_member']);
+Route::match(['post', 'get'], '/login-member', [\App\Http\Controllers\AuthController::class, 'login_member']);
+Route::match(['post', 'get'], '/register', [\App\Http\Controllers\AuthController::class, 'register']);
 //Route::match(['post', 'get'], '/login-admin', [\App\Http\Controllers\AuthController::class, 'login']);
 Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index']);

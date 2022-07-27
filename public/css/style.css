@@ -237,7 +237,7 @@
 .footer {
     height: 200px;
     width: 100%;
-    background-color: #117d17;
+    background-color: #29538d;
 }
 
 .elipsis-one {
@@ -267,4 +267,20 @@
     color: #0a4b0e;
 }
 
+
+.main-background-color {
+    background-color: #29538d;
+}
+
+.main-text-color {
+    color: #29538d;
+}
+
+.secondary-background-color {
+    background-color: #2a1006;
+}
+
+.secondary-text-color {
+    color: #2a1006;
+}
 

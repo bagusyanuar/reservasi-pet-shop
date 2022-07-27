@@ -26,7 +26,7 @@
                     class="fa fa-bars"></i></a>
         </li>
     </ul>
-    <div class="font-weight-bold">Sistem Penjualan Material Toko Kurnia</div>
+    <div class="font-weight-bold">Sistem Reservasi Grooming & Penitipan Omo Cats</div>
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
             <a href="/logout" class="nav-link navbar-link-item">Logout</a>
@@ -36,11 +36,11 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-1">
     <div class="sidebar">
         <a href="/dashboard" class="brand-link">
-            <img src="{{ asset('assets/icon/logo.png') }}"
+            <img src="{{ asset('assets/icon/logo-pet-shop.jpg') }}"
                  alt="AdminLTE Logo"
                  class="brand-image"
             >
-            <span class="brand-text font-weight-light">Laravel</span>
+            <span class="brand-text font-weight-light">Omo Cats</span>
         </a>
         <div class="my-sidebar-menu">
             <ul class="nav nav-sidebar nav-pills flex-column">
