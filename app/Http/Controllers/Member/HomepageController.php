@@ -8,6 +8,7 @@ use App\Helper\CustomController;
 use App\Models\Barang;
 use App\Models\Category;
 use App\Models\Paket;
+use App\Models\Wilayah;
 
 class HomepageController extends CustomController
 {
@@ -18,19 +19,19 @@ class HomepageController extends CustomController
 
     public function index()
     {
-//        $category = Category::all();
-//        $data = Barang::with('category')->get();
         $grooming = Paket::where('tipe', '=', 'grooming')->get();
+        $penitipan = Paket::where('tipe', '=', 'penitipan')->get();
         return view('member.index')->with([
             'grooming' => $grooming,
-//            'data' => $data
+            'penitipan' => $penitipan
         ]);
     }
 
     public function product_page($id)
     {
-        $data = Barang::findOrFail($id);
-        return view('member.product')->with(['data' => $data]);
+        $data = Paket::with('layanan')->findOrFail($id);
+        $wilayah = Wilayah::all();
+        return view('member.product')->with(['data' => $data, 'wilayah' => $wilayah]);
     }
 
     public function category_page($id)

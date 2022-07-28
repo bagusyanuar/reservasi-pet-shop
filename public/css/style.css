@@ -136,19 +136,19 @@
 
 .btn-order-outline {
     border-radius: 10px;
-    border: solid 1px #117d17;
+    border: solid 1px #29538d;
     padding: 10px 20px;
     text-align: center;
-    color: #117d17;
+    color: #29538d;
 }
 
 .btn-order {
     border-radius: 10px;
-    border: solid 1px #117d17;
+    border: solid 1px #29538d;
     padding: 10px 20px;
     text-align: center;
     color: whitesmoke;
-    background-color: #117d17;
+    background-color: #29538d;
 }
 
 .btn-plus {
@@ -160,7 +160,7 @@
 }
 
 .btn-plus:hover {
-    background-color: #0a4b0e;
+    background-color: #152a47;
     color: white;
     text-decoration: none;
 }
@@ -179,13 +179,13 @@
 }
 
 .btn-order:hover {
-    background-color: #0a4b0e;
+    background-color: #152a47;
     color: white;
     text-decoration: none;
 }
 
 .btn-order-outline:hover {
-    background-color: #0a4b0e;
+    background-color: #152a47;
     color: whitesmoke;
     text-decoration: none;
 }
@@ -254,17 +254,25 @@
     -webkit-box-orient: vertical;
 }
 
+.elipsis-three {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
 .text-green {
     color: #117d17;
 }
 
 .category-menu {
-    color: #117d17;
+    color: #29538d;
     font-weight: bold;
 }
 .category-menu:hover {
     text-decoration: none;
-    color: #0a4b0e;
+    color: #152a47;
 }
 
 
@@ -277,10 +285,13 @@
 }
 
 .secondary-background-color {
-    background-color: #2a1006;
+    background-color: #152a47;
 }
 
 .secondary-text-color {
-    color: #2a1006;
+    color: #152a47;
 }
 
+.panel-slot {
+
+}

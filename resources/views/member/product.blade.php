@@ -14,92 +14,147 @@
             <li class="breadcrumb-item active" aria-current="page">{{ $data->nama }}
             </li>
         </ol>
-        <div class="w-100 row product-detail">
+        <div class="w-100 row product-detail" style="min-height: 350px;">
             <div class="col-lg-4 col-md-4">
-                <div style="border: solid 1px #117d17; border-radius: 5px; padding: 5px 5px">
-                    <img src="{{ asset('/assets/barang'). '/' . $data->gambar }}" height="400"
-                         alt="Gambar Produk" class="mr-3 w-100" style="border-radius: 5px">
-                </div>
-
-            </div>
-            <div class="col-lg-5 col-md-5">
-                <div class="flex-grow-1">
-                    <div class="font-weight-bold text-green" style="font-size: 24px">{{ $data->nama }}</div>
-                    <div style="font-size: 14px; color: #777777">{{ $data->category->nama }}</div>
-                    <div class="font-weight-bold text-green" id="lbl-harga" data-harga="{{ $data->harga }}" style="font-size: 24px">
-                        Rp. {{ number_format($data->harga, 0, ',', '.') }}</div>
-                    <div style="text-align: justify">{{ $data->deskripsi }}</div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3">
-                <div style="border: solid 1px #777777; border-radius: 5px; padding: 10px;">
-                    <p class="font-weight-bold">Atur Jumlah</p>
-                    <div class="d-flex justify-content-between align-items-start w-100">
-                        <div style="font-size: 14px; font-weight: bold; color: #777777" class="w-50"
-                             data-qty="{{$data->qty}}" id="lbl-stock">Sisa {{ $data->qty }}</div>
-                        <div class="d-flex mb-2 align-items-center">
-                            <a href="#" class="btn btn-minus btn-min mr-1"><i class="fa fa-minus"
-                                                                              style="font-size: 14px"></i></a>
-                            <input class="form-control form-control-sm text-right" type="number" id="qty" name="qty"
-                                   value="1">
-                            <a href="#" class="btn btn-plus ml-1 btn-add"><i class="fa fa-plus"></i></a>
+                <h5 class="card-title mb-2 card-text-title font-weight-bold"
+                    style="color: #535961; font-size: 18px">{{$data->nama}}</h5>
+                @if($data->tipe == 'grooming')
+                    <p style="color: #535961; font-size: 14px">{{ $data->deskripsi }}</p>
+                    <div class="card" style="border-color: #29538d">
+                        <div class="card-header" style="background-color: #29538d ">
+                            <p class="font-weight-bold mb-0" style="color: whitesmoke; font-size: 18px">Layanan
+                                Grooming</p>
+                        </div>
+                        <div class="card-body">
+                            @foreach($data->layanan as $v)
+                                <div style="color: #535961; font-size: 16px">
+                                    <i class="fa fa-check mr-2"></i>
+                                    <span class="font-weight-bold">{{ $v->nama }}</span>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
-                    <div class="d-flex align-items-center">
+                @endif
+                @if($data->tipe == 'penitipan')
 
-                        <div class="mr-1" style="color: #777777">Subtotal</div>
-                        <div id="lbl-sub-total" class="flex-grow-1 text-right text-green" style="font-size: 20px; font-weight: bold">
-                            Rp. {{ number_format($data->harga, 0, ',', '.') }}</div>
+                    <div class="card" style="border-color: #29538d">
+                        <div class="card-header" style="background-color: #29538d ">
+                            <p class="font-weight-bold mb-0" style="color: whitesmoke; font-size: 18px">Detail
+                                Penitipan</p>
+                        </div>
+                        <div class="card-body">
+                            <p style="color: #535961; font-size: 14px">{{ $data->deskripsi }}</p>
+                        </div>
                     </div>
-                    <div class="w-100 mt-2 mb-1">
-                        <a href="#" class="btn btn-order w-100" id="btn-add-cart">Tambah Keranjang</a>
-                    </div>
-                    <div class="w-100">
-                        <a href="#" class="btn btn-order-outline w-100" id="btn-buy">Beli Sekarang</a>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-        <div class="mt-3 mb-2">
-            <div class="d-flex align-items-center justify-content-between">
-                <p class="font-weight-bold text-green mb-0" style="font-size: 20px;">Rekomendasi Produk</p>
-                @if(count($recommend) > 0)
-                    <a href="/beranda/category/{{ $recommend[0]->id }}" class="category-menu">
-                        Lihat Lainnya
-                    </a>
                 @endif
             </div>
-
-            <div class="row product-detail">
-                @forelse($recommend as $v)
-                    <div class="col-lg-3 col-md-4 mb-4">
-                        <div class="card card-item" data-id="{{ $v->id }}"
-                             style="cursor: pointer; height: 400px; border-color: #117d17">
-                            <img class="card-img-top" src="{{ asset('/assets/barang'). "/" . $v->gambar }}"
-                                 alt="Card image cap" height="200">
-                            <div class="card-body" style="height: 200px">
-                                <p class="card-title font-weight-bold elipsis-one text-green">{{ $v->nama }}</p>
-                                <p class="text-green elipsis-two mb-0"
-                                   style="color: #535961; font-size: 12px; height: 35px">{{ $v->deskripsi }}</p>
-                                <p class="font-weight-bold text-green" style="font-size: 20px;">
-                                    Rp. {{ number_format($v->harga, 0, ',', '.') }}</p>
-                                <div class="d-flex w-100 justify-content-between align-items-center">
-                                    <p class="text-green mb-0" style="color: #535961; font-size: 12px;">Stock
-                                        : {{ $v->qty }}</p>
+            <div class="col-lg-8 col-md-8">
+                <div style="border: solid 1px #29538d; border-radius: 5px; padding: 10px;">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <p class="font-weight-bold mb-1 main-text-color">Data Reservasi</p>
+                            @auth()
+                                <div class="form-group w-100 mb-1">
+                                    <label for="kucing">Kucing</label>
+                                    <select class="form-control" id="kucing" name="kucing">
+                                        @foreach(auth()->user()->kucing as $k)
+                                            <option value="{{ $k->id }}">{{ $k->nama }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-
+                            @endauth
+                            @if($data->tipe == 'grooming')
+                                <div class="w-100 mb-1">
+                                    <label for="tanggal" class="form-label">Tanggal Reservasi</label>
+                                    <input type="date" class="form-control" id="tanggal"
+                                           name="tanggal" value="{{ date('Y-m-d') }}">
+                                </div>
+                                <div class="w-100 mb-1">
+                                    <label for="jam" class="form-label">Jam Reservasi</label>
+                                    <input type="time" class="form-control" id="jam"
+                                           name="jam" value="{{ date('H:i:s') }}">
+                                </div>
+                            @endif
+                            @if($data->tipe == 'penitipan')
+                                <div class="w-100 mb-1">
+                                    <label for="check_in" class="form-label">Check in</label>
+                                    <input type="date" class="form-control" id="check_in"
+                                           name="check_in" value="{{ date('Y-m-d') }}">
+                                </div>
+                                <div class="w-100 mb-1">
+                                    <label for="check_out" class="form-label">Check Out</label>
+                                    <input type="date" class="form-control" id="check_out"
+                                           name="check_out" value="{{ date('Y-m-d') }}">
+                                </div>
+                            @endif
+                            <div class="form-group w-100 mb-1">
+                                <label for="transport">Antar Jemput</label>
+                                <select class="form-control" id="transport" name="transport">
+                                    <option value="0">Tidak</option>
+                                    <option value="1">Ya</option>
+                                </select>
+                            </div>
+                            <div class="d-none" id="panel-transport">
+                                <div class="form-group w-100 mb-1">
+                                    <label for="wilayah">Wilayah</label>
+                                    <select class="form-control" id="wilayah" name="wilayah">
+                                        <option value="0">--pilih wilayah--</option>
+                                        @foreach($wilayah as $w)
+                                            <option value="{{ $w->harga }}">{{ $w->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="w-100 mb-1">
+                                    <label for="alamat" class="form-label">Alamat</label>
+                                    <textarea rows="3" class="form-control" id="alamat"
+                                              name="alamat"></textarea>
+                                </div>
+                            </div>
+                            <div class="w-100 mb-1">
+                                <label for="catatan" class="form-label">Catatan</label>
+                                <textarea rows="3" class="form-control" id="catatan"
+                                          name="catatan"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="card" style="border-color: #29538d">
+                                <div class="card-header" style="background-color: #29538d ">
+                                    <p class="font-weight-bold mb-0 text-center"
+                                       style="color: whitesmoke; font-size: 18px">Slot Reservasi</p>
+                                </div>
+                                <div class="card-body">
+                                    <p class="font-weight-bold text-center" style="font-size: 36px" id="lbl-slot">0</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <p class="font-weight-bold mb-0 main-text-color">Rincian Biaya</p>
+                            <div class="d-flex align-items-center">
+                                <div class="mr-1 main-text-color" style="color: #777777">Subtotal</div>
+                                <div id="lbl-sub-total" class="flex-grow-1 text-right main-text-color"
+                                     style="font-size: 20px; font-weight: bold" data-harga="{{$data->harga}}">
+                                    Rp. {{ number_format($data->harga, 0, ',', '.') }}</div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="mr-1 main-text-color" style="color: #777777">Transport</div>
+                                <div id="lbl-transport" class="flex-grow-1 text-right main-text-color"
+                                     style="font-size: 20px; font-weight: bold">
+                                    Rp. 0
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex align-items-center">
+                                <div class="mr-1 main-text-color" style="color: #777777">Total</div>
+                                <div id="lbl-total" class="flex-grow-1 text-right main-text-color"
+                                     style="font-size: 20px; font-weight: bold">
+                                    Rp. {{ number_format($data->harga, 0, ',', '.') }}</div>
+                            </div>
+                            <div class="w-100 mt-2 mb-1">
+                                <a href="#" class="btn btn-order w-100" id="btn-reservasi">Reservasi</a>
                             </div>
                         </div>
                     </div>
-                @empty
-                    <div class="col-12 text-center">
-                        <p class="font-weight-bold text-green" style="font-size: 20px">
-                            Tidak Ada Rekomendasi
-                        </p>
-                    </div>
-                @endforelse
+
+                </div>
             </div>
         </div>
     </div>
@@ -108,88 +163,97 @@
 @section('js')
     <script>
         var barang_id = '{{$data->id}}';
+        var tipe = '{{ $data->tipe }}';
 
-        async function addToCart(direct = false) {
+        async function getSlot() {
+            try {
+                let response = await $.get('/product/slot');
+                let payload = response['payload'];
+                let tanggal = $('#tanggal').val();
+                if (tipe === 'penitipan') {
+                    tanggal = $('#check_in').val();
+                }
+                let responseUsed = await $.get('/product/slot/' + tipe + '?tanggal=' + tanggal);
+                let payloadUsed = responseUsed['payload'];
+                let rest = payload[tipe] - payloadUsed;
+                console.log(responseUsed);
+                $('#lbl-slot').html(rest);
+            } catch (e) {
+                alert('gagal load slot');
+            }
+        }
+
+        function getTransport(status) {
+            if (status === '1') {
+                let transport = $('#wilayah').val();
+                $('#lbl-transport').html('Rp. ' + formatUang(transport.toString()));
+                setTotal(parseInt(transport));
+            } else {
+                $('#lbl-transport').html('Rp. 0');
+                setTotal(0);
+            }
+        }
+
+        function setTotal(transport = 0) {
+            let sub_total = parseInt($('#lbl-sub-total').attr('data-harga'));
+            let total = sub_total + transport;
+            $('#lbl-total').html('Rp. ' + formatUang(total.toString()))
+        }
+
+        async function checkout() {
             try {
                 blockLoading(true);
-                let response = await $.post('/beranda/cart/create', {
-                    barang: barang_id,
-                    qty: $('#qty').val()
-                });
-                blockLoading(false);
-                if (response.status === 202) {
-                    window.location.href = '/login-member';
-                } else {
-                    if (direct === true) {
-                        window.location.href = '/beranda/cart';
-                    } else {
-                        SuccessAlert('Berhasil', 'Berhasil menambah data ke keranjang belanja');
-                        window.location.reload();
+                let data = {};
+                if (tipe === 'grooming') {
+                    data = {
+                        type: 'grooming',
+                        tanggal_reservasi: $('#tanggal').val(),
+                        jam: $('#jam').val(),
+                        kucing: $('#kucing').val(),
+                        transport: $('#wilayah').val(),
+                        alamat: '(' + $("#wilayah option:selected").text() + ') ' + $('#alamat').val(),
+                        catatan: $('#catatan').val(),
                     }
                 }
+                let response = await $.post('/reservasi/checkout', data);
+                blockLoading(false);
+                window.location.reload();
             } catch (e) {
-                ErrorAlert('Error', 'terjadi kesalahan')
+                alert('Terjadi Kesalahan');
             }
         }
 
         $(document).ready(function () {
-            $('#qty').on('change', function (e) {
-                let val = parseInt(this.value);
-                let stock = parseInt($('#lbl-stock').attr('data-qty'));
-                let price = parseInt($('#lbl-harga').attr('data-harga'));
-                if (stock < val) {
-                    e.preventDefault();
-                    $('#qty').val(stock);
-                    let qty = parseInt($('#qty').val());
-                    let total = price * qty;
-                    $('#lbl-sub-total').html('Rp. '+formatUang(total))
-                } else if (val < 1) {
-                    e.preventDefault();
-                    $('#qty').val('1');
-                    let qty = parseInt($('#qty').val());
-                    let total = price * qty;
-                    $('#lbl-sub-total').html('Rp. '+formatUang(total))
-                } else {
-                    let qty = parseInt($('#qty').val());
-                    let total = price * qty;
-                    $('#lbl-sub-total').html('Rp. '+formatUang(total))
-                }
+            getSlot();
+            $('#tanggal').on('change', function (e) {
+                getSlot();
             });
-            $('.btn-add').on('click', function (e) {
-                e.preventDefault();
-                let currentQty = parseInt($('#qty').val());
-                let stock = parseInt($('#lbl-stock').attr('data-qty'));
-                let price = parseInt($('#lbl-harga').attr('data-harga'));
-                if (stock > currentQty) {
-                    let qty = currentQty + 1
-                    $('#qty').val(qty);
-                    let total = price * qty;
-                    $('#lbl-sub-total').html('Rp. '+formatUang(total))
-                }
-            });
-            $('.btn-min').on('click', function (e) {
-                e.preventDefault();
-                let currentQty = parseInt($('#qty').val());
-                let qty = currentQty - 1;
-                let price = parseInt($('#lbl-harga').attr('data-harga'));
-                if (qty > 0) {
-                    let total = price * qty;
-                    $('#qty').val(qty);
-                    $('#lbl-sub-total').html('Rp. '+formatUang(total))
-                }
-            });
-            $('#btn-add-cart').on('click', function (e) {
-                e.preventDefault();
-                addToCart();
-            })
-            $('#btn-buy').on('click', function (e) {
-                e.preventDefault();
-                addToCart(true);
-            })
 
-            $('.card-item').on('click', function () {
-                let id = this.dataset.id;
-                window.location.href = '/beranda/product/' + id + '/detail';
+            $('#check_in').on('change', function (e) {
+                getSlot();
+            });
+
+            $('#transport').on('change', function () {
+                let val = this.value;
+                console.log(val);
+                if (val === '1') {
+                    $('#panel-transport').removeClass('d-none')
+                    $('#panel-transport').addClass('d-block')
+                } else {
+                    $('#panel-transport').removeClass('d-block')
+                    $('#panel-transport').addClass('d-none')
+                    $('#wilayah').val('0');
+                    $('#alamat').val('');
+                    getTransport('0')
+                }
+            });
+
+            $('#wilayah').on('change', function () {
+                getTransport('1');
+            });
+            $('#btn-reservasi').on('click', function (e) {
+                e.preventDefault();
+                checkout()
             });
         });
     </script>

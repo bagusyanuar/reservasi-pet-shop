@@ -13,16 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', [\App\Http\Controllers\Member\HomepageController::class, 'index']);
-//Route::match(['post', 'get'],'/', [\App\Http\Controllers\AuthController::class, 'login_member']);
 Route::match(['post', 'get'], '/login-member', [\App\Http\Controllers\AuthController::class, 'login_member']);
 Route::match(['post', 'get'], '/register', [\App\Http\Controllers\AuthController::class, 'register']);
-//Route::match(['post', 'get'], '/login-admin', [\App\Http\Controllers\AuthController::class, 'login']);
+Route::match(['post', 'get'], '/login-admin', [\App\Http\Controllers\AuthController::class, 'login']);
 Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index']);
-
-
 Route::get('/product/{id}/detail', [\App\Http\Controllers\Member\HomepageController::class, 'product_page']);
 Route::get('/product/data', [\App\Http\Controllers\Member\ProductController::class, 'get_product_by_name']);
+Route::get('/product/slot', [\App\Http\Controllers\Admin\SlotController::class, 'getSlot']);
+Route::get('/product/slot/{type}', [\App\Http\Controllers\Admin\SlotController::class, 'getUsedSlot']);
+Route::post('/reservasi/checkout', [\App\Http\Controllers\Member\ReservasiController::class, 'reservasi']);
 
 
 Route::group(['prefix' => 'admin'], function () {
