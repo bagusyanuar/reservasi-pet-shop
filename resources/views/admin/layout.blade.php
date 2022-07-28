@@ -90,31 +90,24 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/category"
+                                <a href="/layanan"
                                    class="nav-link">
                                     <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
-                                    <p>Kategori</p>
+                                    <p>Layanan</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/product"
+                                <a href="/data-paket"
                                    class="nav-link">
                                     <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
-                                    <p>Produk</p>
+                                    <p>Paket</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/kota"
+                                <a href="/wilayah"
                                    class="nav-link">
                                     <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
-                                    <p>Kota</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/ongkir"
-                                   class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
-                                    <p>Ongkos Kirim</p>
+                                    <p>Wilayah</p>
                                 </a>
                             </li>
                         </ul>
@@ -123,34 +116,34 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fa fa-briefcase"></i>
                             <p>
-                                Pesanan
+                                Reservasi
                                 <i class="right fa fa-angle-down"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/pesanan"
+                                <a href="/reservasi-baru"
                                    class="nav-link">
                                     <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
                                     <p>Baru</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/pesanan-proses"
+                                <a href="/reservasi-waiting-list"
                                    class="nav-link">
                                     <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
-                                    <p>Di Packing</p>
+                                    <p>Waiting List</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/pesanan-selesai-menunggu"
+                                <a href="/reservasi-ongoing"
                                    class="nav-link">
                                     <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
-                                    <p>Ambil / Kirim</p>
+                                    <p>Ongoing</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/pesanan-selesai"
+                                <a href="/reservasi-selesai"
                                    class="nav-link">
                                     <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
                                     <p>Selesai</p>

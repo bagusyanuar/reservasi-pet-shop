@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Member;
 
 use App\Helper\CustomController;
 use App\Models\Payment;
+use App\Models\Reservasi;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +20,7 @@ class PembayaranController extends CustomController
 
     public function detail($id)
     {
-        $data = Transaction::with(['waiting_payment'])->where('user_id', '=', Auth::id())
+        $data = Reservasi::with(['payment'])->where('user_id', '=', Auth::id())
             ->findOrFail($id);
         return view('member.pembayaran')->with(['data' => $data]);
     }
@@ -28,13 +29,13 @@ class PembayaranController extends CustomController
     {
         try {
             DB::beginTransaction();
-            $transaction = Transaction::find($id);
+            $reservasi = Reservasi::find($id);
             $data = [
-                'transaction_id' => $transaction->id,
+                'reservasi_id' => $reservasi->id,
                 'bank' => $this->postField('bank'),
                 'no_rekening' => $this->postField('no_rekening'),
                 'nama' => $this->postField('nama'),
-                'total' => $transaction->total,
+                'total' => $reservasi->total,
                 'status' => 'menunggu',
                 'keterangan' => '',
             ];
@@ -45,7 +46,7 @@ class PembayaranController extends CustomController
                 $this->uploadImage('bukti', $nama_gambar, 'bukti');
             }
             Payment::create($data);
-            $transaction->update([
+            $reservasi->update([
                 'status' => 'terbayar'
             ]);
             DB::commit();
@@ -58,7 +59,7 @@ class PembayaranController extends CustomController
 
     public function cetak($id)
     {
-        $data = Transaction::with(['user', 'cart.product'])->where('user_id', '=', Auth::id())
+        $data = Reservasi::with(['user.member', 'penitipan.kucing', 'grooming.kucing', 'paket'])->where('user_id', '=', Auth::id())
             ->findOrFail($id);
         $html = view('member.nota')->with(['data' => $data]);
         $pdf = \App::make('dompdf.wrapper');

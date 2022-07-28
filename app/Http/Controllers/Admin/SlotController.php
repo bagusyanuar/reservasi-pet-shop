@@ -32,11 +32,17 @@ class SlotController extends CustomController
             $tanggal = $this->field('tanggal');
             if($type === 'grooming') {
                 $grooming = ReservasiGrooming::with('reservasi')
+                    ->whereHas('reservasi', function ($query){
+                        return $query->where('status', '=', 'ongoing');
+                    })
                     ->where('tanggal', '=', $tanggal)
                     ->get();
                 $count = count($grooming);
             } else {
                 $penitipan = ReservasiPenitipan::with('reservasi')
+                    ->whereHas('reservasi', function ($query){
+                        return $query->where('status', '=', 'ongoing');
+                    })
                     ->whereRaw('? between check_in and check_out', [$tanggal])
                     ->get();
                 $count = count($penitipan);

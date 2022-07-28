@@ -129,11 +129,19 @@
                             <hr>
                             <p class="font-weight-bold mb-0 main-text-color">Rincian Biaya</p>
                             <div class="d-flex align-items-center">
-                                <div class="mr-1 main-text-color" style="color: #777777">Subtotal</div>
+                                <div class="mr-1 main-text-color" style="color: #777777">Subtotal
+                                    @if($data->tipe === 'penitipan')
+                                        <span id="lbl-lama" class="ml-2"
+                                              style="font-size: 10px; font-weight: bold">
+                                                (1 Hari)
+                                            </span>
+                                    @endif
+                                </div>
                                 <div id="lbl-sub-total" class="flex-grow-1 text-right main-text-color"
                                      style="font-size: 20px; font-weight: bold" data-harga="{{$data->harga}}">
                                     Rp. {{ number_format($data->harga, 0, ',', '.') }}</div>
                             </div>
+
                             <div class="d-flex align-items-center">
                                 <div class="mr-1 main-text-color" style="color: #777777">Transport</div>
                                 <div id="lbl-transport" class="flex-grow-1 text-right main-text-color"
@@ -141,6 +149,7 @@
                                     Rp. 0
                                 </div>
                             </div>
+
                             <hr>
                             <div class="d-flex align-items-center">
                                 <div class="mr-1 main-text-color" style="color: #777777">Total</div>
@@ -162,7 +171,7 @@
 
 @section('js')
     <script>
-        var barang_id = '{{$data->id}}';
+        var paket_id = '{{$data->id}}';
         var tipe = '{{ $data->tipe }}';
 
         async function getSlot() {
@@ -183,20 +192,40 @@
             }
         }
 
-        function getTransport(status) {
+        function getTransport(status, qty = 1) {
             if (status === '1') {
                 let transport = $('#wilayah').val();
                 $('#lbl-transport').html('Rp. ' + formatUang(transport.toString()));
-                setTotal(parseInt(transport));
+                if (tipe === 'grooming') {
+                    setTotal(parseInt(transport));
+                }
+
+                if (tipe === 'penitipan') {
+                    setTotalPenitipan(parseInt(transport), qty);
+                }
             } else {
                 $('#lbl-transport').html('Rp. 0');
-                setTotal(0);
+                if (tipe === 'grooming') {
+                    setTotal(0);
+                }
+
+                if (tipe === 'penitipan') {
+                    setTotalPenitipan(0, qty);
+                }
             }
         }
 
         function setTotal(transport = 0) {
             let sub_total = parseInt($('#lbl-sub-total').attr('data-harga'));
             let total = sub_total + transport;
+            $('#lbl-total').html('Rp. ' + formatUang(total.toString()))
+        }
+
+        function setTotalPenitipan(transport = 0, qty = 1) {
+            let sub_total = parseInt($('#lbl-sub-total').attr('data-harga'));
+            let total = (sub_total * qty) + transport;
+            $('#lbl-lama').html(qty + ' hari');
+            $('#lbl-sub-total').html('Rp. ' + formatUang((sub_total * qty).toString()))
             $('#lbl-total').html('Rp. ' + formatUang(total.toString()))
         }
 
@@ -213,12 +242,30 @@
                         transport: $('#wilayah').val(),
                         alamat: '(' + $("#wilayah option:selected").text() + ') ' + $('#alamat').val(),
                         catatan: $('#catatan').val(),
+                        paket: paket_id
                     }
                 }
+
+                if (tipe === 'penitipan') {
+                    data = {
+                        type: 'penitipan',
+                        check_in: $('#check_in').val(),
+                        check_out: $('#check_out').val(),
+                        kucing: $('#kucing').val(),
+                        transport: $('#wilayah').val(),
+                        alamat: '(' + $("#wilayah option:selected").text() + ') ' + $('#alamat').val(),
+                        catatan: $('#catatan').val(),
+                        paket: paket_id
+                    };
+                }
                 let response = await $.post('/reservasi/checkout', data);
+                let payload = response['payload'];
+                console.log(response);
                 blockLoading(false);
-                window.location.reload();
+                window.location.href = '/pembayaran/' + payload + '/detail';
             } catch (e) {
+                blockLoading(false);
+                console.log(e);
                 alert('Terjadi Kesalahan');
             }
         }
@@ -249,12 +296,42 @@
             });
 
             $('#wilayah').on('change', function () {
-                getTransport('1');
+                let tgl1 = $('#check_in').val();
+                let tgl2 = $('#check_out').val();
+                let qty = calculate_days(tgl1, tgl2) + 1;
+                if (tipe === 'grooming') {
+                    getTransport('1');
+                }
+
+                if (tipe === 'penitipan') {
+                    getTransport('1', qty);
+                }
+
             });
             $('#btn-reservasi').on('click', function (e) {
                 e.preventDefault();
                 checkout()
             });
+
+            if (tipe === 'penitipan') {
+                let tgl1 = $('#check_in').val();
+                let tgl2 = $('#check_out').val();
+                let qty = calculate_days(tgl1, tgl2) + 1;
+                if (tipe === 'grooming') {
+                    getTransport('1');
+                }
+
+                if (tipe === 'penitipan') {
+                    getTransport('1', qty);
+                }
+                $('#check_out').on('change', function (e) {
+                    let tgl1 = $('#check_in').val();
+                    let tgl2 = this.value;
+                    let qty = calculate_days(tgl1, tgl2) + 1;
+                    let transport = $('#transport').val();
+                    getTransport(transport, qty);
+                });
+            }
         });
     </script>
 @endsection

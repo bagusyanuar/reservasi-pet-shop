@@ -10,7 +10,7 @@ class Payment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'transaction_id',
+        'reservasi_id',
         'bank',
         'no_rekening',
         'nama',
@@ -20,8 +20,8 @@ class Payment extends Model
         'keterangan',
     ];
 
-    public function transaction()
+    public function reservasi()
     {
-        return $this->belongsTo(Transaction::class, 'transaction_id');
+        return $this->belongsTo(Reservasi::class, 'reservasi_id');
     }
 }

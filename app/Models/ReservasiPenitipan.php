@@ -25,4 +25,9 @@ class ReservasiPenitipan extends Model
     {
         return $this->belongsTo(Reservasi::class, 'reservasi_id');
     }
+
+    public function kucing()
+    {
+        return $this->belongsTo(Kucing::class, 'kucing_id');
+    }
 }

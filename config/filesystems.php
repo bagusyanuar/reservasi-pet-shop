@@ -77,6 +77,18 @@ return [
             'url' => env('APP_URL') . '/public',
             'visibility' => 'public',
         ],
+        'kucing' => [
+            'driver' => 'local',
+            'root' => public_path() . '/assets/kucing',
+            'url' => env('APP_URL') . '/public',
+            'visibility' => 'public',
+        ],
+        'kegiatan' => [
+            'driver' => 'local',
+            'root' => public_path() . '/assets/kegiatan',
+            'url' => env('APP_URL') . '/public',
+            'visibility' => 'public',
+        ],
 
     ],
 

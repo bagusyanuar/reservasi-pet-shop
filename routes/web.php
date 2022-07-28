@@ -24,6 +24,12 @@ Route::get('/product/slot', [\App\Http\Controllers\Admin\SlotController::class, 
 Route::get('/product/slot/{type}', [\App\Http\Controllers\Admin\SlotController::class, 'getUsedSlot']);
 Route::post('/reservasi/checkout', [\App\Http\Controllers\Member\ReservasiController::class, 'reservasi']);
 
+Route::group(['prefix' => 'pembayaran'], function (){
+    Route::get('/{id}/detail', [\App\Http\Controllers\Member\PembayaranController::class, 'detail']);
+    Route::post('/{id}/create', [\App\Http\Controllers\Member\PembayaranController::class, 'create']);
+    Route::get('/{id}/cetak', [\App\Http\Controllers\Member\PembayaranController::class, 'cetak']);
+});
+
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get( '/', [\App\Http\Controllers\Admin\AdminController::class, 'index']);
@@ -79,6 +85,15 @@ Route::group(['prefix' => 'ongkir'], function () {
     Route::post( '/delete', [\App\Http\Controllers\Admin\OngkirController::class, 'destroy']);
 });
 
+Route::group(['prefix' => 'reservasi-baru'], function () {
+    Route::get( '/', [\App\Http\Controllers\Admin\ReservasiController::class, 'index']);
+    Route::match(['post', 'get'], '/{id}/detail', [\App\Http\Controllers\Admin\ReservasiController::class, 'detail']);
+});
+
+Route::group(['prefix' => 'reservasi-waiting-list'], function () {
+    Route::get( '/', [\App\Http\Controllers\Admin\ReservasiController::class, 'waiting_list']);
+    Route::match(['post', 'get'], '/{id}/detail', [\App\Http\Controllers\Admin\ReservasiController::class, 'detail_waiting_list']);
+});
 
 Route::group(['prefix' => 'pesanan'], function () {
     Route::get( '/', [\App\Http\Controllers\Admin\PaymentController::class, 'index']);
@@ -144,10 +159,6 @@ Route::group(['prefix' => 'beranda'],  function (){
         Route::get('/{id}/detail', [\App\Http\Controllers\Member\TransaksiController::class, 'detail']);
     });
 
-    Route::group(['prefix' => 'pembayaran'], function (){
-        Route::get('/{id}/detail', [\App\Http\Controllers\Member\PembayaranController::class, 'detail']);
-        Route::post('/{id}/create', [\App\Http\Controllers\Member\PembayaranController::class, 'create']);
-        Route::get('/{id}/cetak', [\App\Http\Controllers\Member\PembayaranController::class, 'cetak']);
-    });
+
 });
 
