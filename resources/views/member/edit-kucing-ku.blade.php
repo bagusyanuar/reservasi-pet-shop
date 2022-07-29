@@ -28,6 +28,9 @@
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-6 col-sm-11">
                     <div class="card">
+                        <div class="card-header" style="background-color: #29538d">
+                            <p class="font-weight-bold mb-0" style="color: whitesmoke; font-size: 18px">Data Kucing</p>
+                        </div>
                         <div class="card-body">
                             <form method="post" action="/kucing-ku/patch" enctype="multipart/form-data">
                                 @csrf

@@ -36,9 +36,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark"
      style="height: 75px; background-color: #29538d; box-shadow: none !important;">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="{{ asset('/assets/icon/brand-logo.png') }}" width="30" height="30" alt="">
-            <span>OMO Cats</span>
+        <a class="navbar-brand" href="/">
+            <img src="{{ asset('/assets/icon/small-logo.png') }}" width="30" height="30" alt="">
+            <span class="ml-2">OMO Cats</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

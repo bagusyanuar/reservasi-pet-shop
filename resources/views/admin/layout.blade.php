@@ -198,7 +198,8 @@
         crossorigin="anonymous"></script>
 <script src="{{ asset('/bootstrap/js/bootstrap.js') }}"></script>
 <script src="{{ asset ('/adminlte/js/adminlte.js') }}"></script>
-<script src="{{ asset('/datatables/jquery.dataTables.js') }}"></script>
+{{--<script src="{{ asset('/datatables/jquery.dataTables.js') }}"></script>--}}
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="{{ asset('/datatables/dataTables.bootstrap4.min.js') }}"></script>
 @yield('js')
 </body>

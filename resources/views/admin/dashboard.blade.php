@@ -17,6 +17,14 @@
                 </li>
             </ol>
         </div>
+
+        <div class="w-100 product-detail text-center" style="margin-top: 70px; min-height: 350px; background-color: inherit !important; border-color: transparent !important;">
+            <img src="{{ asset('/assets/icon/logo-pet-shop.jpg') }}" height="300"/>
+            <p class="mb-1 mt-2 font-weight-bold" style="color: #535961;">
+                omo cats pets & grooming menyediakan jasa layanan grooming dan
+                penitipan kucing
+            </p>
+        </div>
     </div>
 
 @endsection

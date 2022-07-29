@@ -184,7 +184,7 @@
 }
 
 .my-sidebar{
-    background-color: #153D78;
+    background-color: #29538d;
     color: var(--text-light);
 }
 
@@ -306,5 +306,5 @@ a.nav-link.active{
 }
 
 .sidebar-dark-primary{
-    background-color: #610C63 !important;
+    background-color: #29538d !important;
 }
