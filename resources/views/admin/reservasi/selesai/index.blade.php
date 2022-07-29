@@ -75,7 +75,7 @@
                                 <td>{{ $g->user->member->nama }}</td>
                                 <td>{{ $g->paket->nama }}</td>
                                 <td class="text-center">
-                                    <a href="/reservasi-ongoing/{{ $g->id }}/detail"
+                                    <a href="/reservasi-selesai/{{ $g->id }}/detail"
                                        class="btn btn-sm btn-info btn-edit"
                                        data-id="{{ $g->id }}"><i class="fa fa-info"></i></a>
                                 </td>

@@ -268,6 +268,59 @@
                                             </div>
                                         </div>
                                     @endif
+
+                                    @if($data->tipe == 'grooming')
+                                        <a target="_blank"
+                                           href="{{ asset('assets/kucing')."/".$data->grooming->kucing->foto }}">
+                                            <img src="{{  asset('assets/kucing')."/".$data->grooming->kucing->foto }}"
+                                                 alt="Gambar Kucing"
+                                                 style="width: 150px; height: 150px; object-fit: cover">
+                                        </a>
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-6">
+                                                <span class="font-weight-bold">Nama Kucing</span>
+                                            </div>
+                                            <div class="col-lg-8 col-md-6">
+                                                <span
+                                                    class="font-weight-bold">: {{ $data->grooming->kucing->nama }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-6">
+                                                <span class="font-weight-bold">Ras</span>
+                                            </div>
+                                            <div class="col-lg-8 col-md-6">
+                                                <span
+                                                    class="font-weight-bold">: {{ $data->grooming->kucing->ras }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-6">
+                                                <span class="font-weight-bold">Jenis Kelamin</span>
+                                            </div>
+                                            <div class="col-lg-8 col-md-6">
+                                                <span
+                                                    class="font-weight-bold">: {{ ucwords($data->grooming->kucing->jenis_kelamin) }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-6">
+                                                <span class="font-weight-bold">Pola</span>
+                                            </div>
+                                            <div class="col-lg-8 col-md-6">
+                                                <span
+                                                    class="font-weight-bold">: {{ $data->grooming->kucing->pola }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-6">
+                                                <span class="font-weight-bold">Usia</span>
+                                            </div>
+                                            <div class="col-lg-8 col-md-6">
+                                                <span class="font-weight-bold">: {{ $data->grooming->kucing->usia }} bulan</span>
+                                            </div>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
 
