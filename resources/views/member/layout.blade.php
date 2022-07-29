@@ -53,7 +53,8 @@
                     <a class="nav-link f-bold color-semi-white" aria-current="page" href="/tentang">Tentang Kami</a>
                 </li>
                 <li class="nav-item mr-1">
-                    <a class="nav-link f-bold color-semi-white" aria-current="page" href="/cara-pemesanan">Cara Pemesanan</a>
+                    <a class="nav-link f-bold color-semi-white" aria-current="page" href="/cara-pemesanan">Cara
+                        Pemesanan</a>
                 </li>
             </ul>
             <div class="d-flex align-items-center">
@@ -119,7 +120,28 @@
     </div>
 </div>
 @yield('content')
-<div class="footer"></div>
+<div class="footer">
+    <div class="d-flex align-items-center w-100 justify-content-center" style="height: 200px">
+        <img src="{{ asset('/assets/icon/logo-pet-shop.jpg') }}" height="180" class="mr-3"/>
+        <div>
+            <p class="font-weight-bold mb-0" style="font-size: 24px; color: white">OMO CATS & GROOMING</p>
+            <div class="d-flex align-items-center">
+                <div style="color: white" class="mr-2">
+                    <i class="fa fa-instagram"></i>
+                    <span>@omocatspets</span>
+                </div>
+                <div style="color: white">
+                    <i class="fa fa-phone-square"></i>
+                    <span>08956087654324</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
 <script src="{{ asset('/jQuery/jquery-3.4.1.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"

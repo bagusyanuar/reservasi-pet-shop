@@ -9,9 +9,11 @@
             <li class="breadcrumb-item active" aria-current="page">Tentang Kami
             </li>
         </ol>
-        <div class="w-100 product-detail" style="min-height: 350px">
-            <p class="mb-1" style="color: #535961;">
-                Kami adalah toko material toilet terlengkap se solo raya
+        <div class="w-100 product-detail text-center" style="min-height: 350px">
+            <img src="{{ asset('/assets/icon/logo-pet-shop.jpg') }}" height="250"/>
+            <p class="mb-1 mt-2" style="color: #535961;">
+                omo cats pets & grooming menyediakan jasa layanan grooming dan
+                penitipan kucing
             </p>
         </div>
     </div>

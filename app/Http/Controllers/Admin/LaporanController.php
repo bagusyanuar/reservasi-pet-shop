@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Admin;
 use App\Helper\CustomController;
 use App\Models\Barang;
 use App\Models\Payment;
+use App\Models\Reservasi;
 use App\Models\Transaction;
 
 class LaporanController extends CustomController
@@ -32,7 +33,7 @@ class LaporanController extends CustomController
                 ->where('status', '!=', 'tolak')
                 ->get();
             return $this->basicDataTables($data);
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             return $this->basicDataTables([]);
         }
     }
@@ -63,8 +64,8 @@ class LaporanController extends CustomController
         try {
             $tgl1 = $this->field('tgl1');
             $tgl2 = $this->field('tgl2');
-            $data = Payment::with(['transaction.user.member'])
-                ->whereHas('transaction', function ($q) use ($tgl1, $tgl2) {
+            $data = Payment::with(['reservasi.paket', 'reservasi.user.member'])
+                ->whereHas('reservasi', function ($q) use ($tgl1, $tgl2) {
                     return $q->whereBetween('tanggal', [$tgl1, $tgl2]);
                 })
                 ->where('status', '=', 'terima')
@@ -79,8 +80,8 @@ class LaporanController extends CustomController
     {
         $tgl1 = $this->field('tgl1');
         $tgl2 = $this->field('tgl2');
-        $data = Payment::with(['transaction.user.member'])
-            ->whereHas('transaction', function ($q) use ($tgl1, $tgl2) {
+        $data = Payment::with(['reservasi.paket', 'reservasi.user.member'])
+            ->whereHas('reservasi', function ($q) use ($tgl1, $tgl2) {
                 return $q->whereBetween('tanggal', [$tgl1, $tgl2]);
             })
             ->where('status', '=', 'terima')
@@ -91,6 +92,45 @@ class LaporanController extends CustomController
             'data' => $data
         ]);
     }
+
+
+    public function laporan_reservasi()
+    {
+        return view('admin.laporan.reservasi.index');
+    }
+
+    public function laporan_reservasi_data()
+    {
+        try {
+            $tgl1 = $this->field('tgl1');
+            $tgl2 = $this->field('tgl2');
+            $data = Reservasi::with(['user.member', 'paket'])
+                ->where('status', '!=', 'tolak')
+                ->where('status', '!=', 'menunggu')
+                ->whereBetween('tanggal', [$tgl1, $tgl2])
+                ->get();
+            return $this->basicDataTables($data);
+        } catch (\Exception $e) {
+            return $this->basicDataTables([]);
+        }
+    }
+
+    public function laporan_reservasi_cetak()
+    {
+        $tgl1 = $this->field('tgl1');
+        $tgl2 = $this->field('tgl2');
+        $data = Reservasi::with(['user.member', 'paket'])
+            ->where('status', '!=', 'tolak')
+            ->where('status', '!=', 'menunggu')
+            ->whereBetween('tanggal', [$tgl1, $tgl2])
+            ->get();
+        return $this->convertToPdf('admin.laporan.reservasi.cetak', [
+            'tgl1' => $tgl1,
+            'tgl2' => $tgl2,
+            'data' => $data
+        ]);
+    }
+
 
     public function laporan_stock()
     {

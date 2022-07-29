@@ -11,12 +11,12 @@
     @endif
     <div class="container-fluid pt-3">
         <div class="d-flex align-items-center justify-content-between mb-3">
-            <p class="font-weight-bold mb-0" style="font-size: 20px">Halaman Laporan Pembayaran</p>
+            <p class="font-weight-bold mb-0" style="font-size: 20px">Halaman Laporan Reservasi</p>
             <ol class="breadcrumb breadcrumb-transparent mb-0">
                 <li class="breadcrumb-item">
                     <a href="/dashboard">Dashboard</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Daftar Laporan Pembayaran
+                <li class="breadcrumb-item active" aria-current="page">Daftar Laporan Reservasi
                 </li>
             </ol>
         </div>
@@ -40,21 +40,16 @@
                 <tr>
                     <th width="5%" class="text-center">#</th>
                     <th>Tanggal</th>
-                    <th>Via</th>
-                    <th>No. Rekening</th>
-                    <th>Atas Nama</th>
                     <th>No. Transaksi</th>
                     <th>Customer</th>
-                    <th>Total</th>
+                    <th>Tipe</th>
+                    <th>Paket</th>
+                    <th>Status</th>
                 </tr>
                 </thead>
                 <tbody>
                 </tbody>
             </table>
-            <div class="text-right mt-3">
-                <span class="mr-2 font-weight-bold">Total Pendapatan : </span>
-                <span class="font-weight-bold" id="lbl-total">Rp. 0</span>
-            </div>
         </div>
     </div>
 
@@ -68,24 +63,23 @@
             table.ajax.reload();
         }
         $(document).ready(function () {
-            table = DataTableGenerator('#table-data', '/laporan-pembayaran/data', [
+            table = DataTableGenerator('#table-data', '/laporan-reservasi/data', [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', searchable: false, orderable: false},
-                {data: 'reservasi.tanggal'},
-                {data: 'bank'},
-                {data: 'no_rekening'},
-                {data: 'nama'},
-                {data: 'reservasi.no_transaksi'},
-                {data: 'reservasi.user.member.nama'},
-                {data: 'total'},
+                {data: 'tanggal'},
+                {data: 'no_transaksi'},
+                {data: 'user.member.nama'},
+                {data: 'tipe'},
+                {data: 'paket.nama'},
+                {data: 'status'},
             ], [], function (d) {
                 d.tgl1 = $('#tgl1').val();
                 d.tgl2 = $('#tgl2').val();
             }, {
                 dom: 'ltipr',
                 "fnDrawCallback": function( oSettings ) {
-                    let data = this.fnGetData();
-                    let total = data.map(item => item['total']).reduce((prev, next) => prev + next, 0);
-                    $('#lbl-total').html('Rp. '+formatUang(total));
+                    // let data = this.fnGetData();
+                    // let total = data.map(item => item['total']).reduce((prev, next) => prev + next, 0);
+                    // $('#lbl-total').html('Rp. '+formatUang(total));
                 }
             });
             $('#tgl1').on('change', function (e) {
@@ -98,7 +92,7 @@
                 e.preventDefault();
                 let tgl1 = $('#tgl1').val();
                 let tgl2 = $('#tgl2').val();
-                window.open('/laporan-pembayaran/cetak?tgl1=' + tgl1 + '&tgl2=' + tgl2, '_blank');
+                window.open('/laporan-reservasi/cetak?tgl1=' + tgl1 + '&tgl2=' + tgl2, '_blank');
             })
         });
     </script>

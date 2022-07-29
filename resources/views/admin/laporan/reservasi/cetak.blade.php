@@ -24,7 +24,7 @@
     </style>
 </head>
 <body>
-<div class="text-center f-bold report-title">LAPORAN PEMBAYARAN RESERVASI OMO CATS</div>
+<div class="text-center f-bold report-title">LAPORAN RESERVASI OMO CATS</div>
 <div class="text-center">Periode Laporan {{ $tgl1 }} - {{ $tgl2 }} </div>
 <hr>
 <table id="my-table" class="table display">
@@ -32,36 +32,27 @@
     <tr>
         <th width="5%" class="text-center">#</th>
         <th>Tanggal</th>
-        <th>Via</th>
-        <th>No. Rekening</th>
-        <th>Atas Nama</th>
         <th>No. Transaksi</th>
         <th>Customer</th>
-        <th>Total</th>
+        <th>Tipe</th>
+        <th>Paket</th>
+        <th>Status</th>
     </tr>
     </thead>
     <tbody>
     @foreach($data as $v)
         <tr>
             <td width="5%" class="text-center">{{ $loop->index + 1 }}</td>
-            <td>{{ $v->reservasi->tanggal }}</td>
-            <td>{{ $v->bank }}</td>
-            <td>{{ $v->no_rekening }}</td>
-            <td>{{ $v->nama }}</td>
-            <td>{{ $v->reservasi->no_transaksi }}</td>
-            <td>{{ $v->reservasi->user->member->nama }}</td>
-            <td>{{ number_format($v->total, 0, ',', '.') }}</td>
+            <td>{{ $v->tanggal }}</td>
+            <td>{{ $v->no_transaksi }}</td>
+            <td>{{ $v->user->member->nama }}</td>
+            <td>{{ $v->tipe }}</td>
+            <td>{{ $v->paket->nama }}</td>
+            <td>{{ $v->status }}</td>
         </tr>
     @endforeach
     </tbody>
 </table>
-<div class="row">
-    <div class="col-xs-6"></div>
-    <div class="col-xs-2">
-        <span class="f-bold">Total Pendapatan</span>
-    </div>
-    <div class="col-xs-3">: {{ number_format($data->sum('total'), 0, '.', ',') }}</div>
-</div>
 <hr>
 <div class="row">
     <div class="col-xs-8"></div>

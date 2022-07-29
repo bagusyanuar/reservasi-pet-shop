@@ -168,13 +168,6 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/laporan-pesanan"
-                                   class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
-                                    <p>Pesanan</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="/laporan-pembayaran"
                                    class="nav-link">
                                     <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
@@ -182,10 +175,10 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/laporan-stock"
+                                <a href="/laporan-reservasi"
                                    class="nav-link">
                                     <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
-                                    <p>Stock</p>
+                                    <p>Reservasi</p>
                                 </a>
                             </li>
                         </ul>

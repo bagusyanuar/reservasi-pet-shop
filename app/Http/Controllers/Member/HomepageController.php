@@ -69,4 +69,9 @@ class HomepageController extends CustomController
     {
         return view('member.hubungi');
     }
+
+    public function pemesanan()
+    {
+        return view('member.pemesanan');
+    }
 }
