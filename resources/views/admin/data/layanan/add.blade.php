@@ -17,15 +17,15 @@
     @endif
     <div class="container-fluid pt-3">
         <div class="d-flex align-items-center justify-content-between mb-3">
-            <p class="font-weight-bold mb-0" style="font-size: 20px">Halaman Wilayah</p>
+            <p class="font-weight-bold mb-0" style="font-size: 20px">Halaman Layanan</p>
             <ol class="breadcrumb breadcrumb-transparent mb-0">
                 <li class="breadcrumb-item">
                     <a href="/dashboard">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="/wilayah">Wilayah</a>
+                    <a href="/layanan">Layanan</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Edit
+                <li class="breadcrumb-item active" aria-current="page">Tambah
                 </li>
             </ol>
         </div>
@@ -34,18 +34,17 @@
                 <div class="col-lg-5 col-md-6 col-sm-11">
                     <div class="card">
                         <div class="card-body">
-                            <form method="post" action="/wilayah/patch">
+                            <form method="post" action="/layanan/create">
                                 @csrf
-                                <input type="hidden" name="id" value="{{ $data->id }}">
                                 <div class="w-100 mb-1">
-                                    <label for="nama" class="form-label">Nama Wilayah</label>
-                                    <input type="text" class="form-control" id="nama" placeholder="Nama Wilayah"
-                                           name="nama" value="{{ $data->nama }}">
+                                    <label for="nama" class="form-label">Nama Layanan</label>
+                                    <input type="text" class="form-control" id="nama" placeholder="Nama Layanan"
+                                           name="nama">
                                 </div>
                                 <div class="w-100 mb-1">
-                                    <label for="harga" class="form-label">Harga (Rp.)</label>
-                                    <input type="number" class="form-control" id="harga" placeholder=""
-                                           name="harga" value="{{ $data->harga }}">
+                                    <label for="harga" class="form-label">Harga Layanan</label>
+                                    <input type="number" class="form-control" id="harga" placeholder="Harga Layanan"
+                                           name="harga" value="0">
                                 </div>
                                 <div class="w-100 mb-2 mt-3 text-right">
                                     <button type="submit" class="btn btn-primary">Simpan</button>

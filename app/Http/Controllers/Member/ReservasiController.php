@@ -20,6 +20,22 @@ class ReservasiController extends CustomController
         parent::__construct();
     }
 
+    public function index()
+    {
+        $data = Reservasi::with('user')
+            ->where('user_id', '=', Auth::id())
+            ->get();
+        return view('member.transaksi')->with(['data' => $data]);
+    }
+
+    public function detail($id)
+    {
+        $data = Reservasi::with(['grooming.kucing', 'penitipan.kucing', 'paket', 'kegiatan'])
+            ->where('user_id', '=', Auth::id())
+            ->findOrFail($id);
+        return view('member.transaksi-detail')->with(['data' => $data]);
+    }
+
     public function reservasi()
     {
         try {

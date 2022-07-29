@@ -110,6 +110,13 @@
                                     <p>Wilayah</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="/kucing"
+                                   class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
+                                    <p>Kucing</p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item has-treeview">

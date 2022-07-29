@@ -5,11 +5,9 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Helper\CustomController;
-use App\Models\Category;
-use App\Models\Kota;
-use App\Models\Wilayah;
+use App\Models\Layanan;
 
-class KotaController extends CustomController
+class LayananController extends CustomController
 {
     public function __construct()
     {
@@ -18,13 +16,13 @@ class KotaController extends CustomController
 
     public function index()
     {
-        $data = Wilayah::all();
-        return view('admin.data.kota.index')->with(['data' => $data]);
+        $data = Layanan::all();
+        return view('admin.data.layanan.index')->with(['data' => $data]);
     }
 
     public function add_page()
     {
-        return view('admin.data.kota.add');
+        return view('admin.data.layanan.add');
     }
 
     public function create()
@@ -34,7 +32,7 @@ class KotaController extends CustomController
                 'nama' => $this->postField('nama'),
                 'harga' => $this->postField('harga'),
             ];
-            Wilayah::create($data);
+            Layanan::create($data);
             return redirect()->back()->with(['success' => 'Berhasil Menambahkan Data...']);
         } catch (\Exception $e) {
             return redirect()->back()->with(['failed' => 'Terjadi Kesalahan ' . $e->getMessage()]);
@@ -43,22 +41,22 @@ class KotaController extends CustomController
 
     public function edit_page($id)
     {
-        $data = Wilayah::findOrFail($id);
-        return view('admin.data.kota.edit')->with(['data' => $data]);
+        $data = Layanan::findOrFail($id);
+        return view('admin.data.layanan.edit')->with(['data' => $data]);
     }
 
     public function patch()
     {
         try {
             $id = $this->postField('id');
-            $wilayah = Wilayah::find($id);
+            $layanan = Layanan::find($id);
             $data = [
                 'nama' => $this->postField('nama'),
                 'harga' => $this->postField('harga'),
             ];
 
-            $wilayah->update($data);
-            return redirect('/wilayah')->with(['success' => 'Berhasil Merubah Data...']);
+            $layanan->update($data);
+            return redirect('/layanan')->with(['success' => 'Berhasil Merubah Data...']);
         } catch (\Exception $e) {
             return redirect()->back()->with(['failed' => 'Terjadi Kesalahan' . $e->getMessage()]);
         }
@@ -68,7 +66,7 @@ class KotaController extends CustomController
     {
         try {
             $id = $this->postField('id');
-            Wilayah::destroy($id);
+            Layanan::destroy($id);
             return $this->jsonResponse('success', 200);
         } catch (\Exception $e) {
             return $this->jsonResponse('failed', 500);

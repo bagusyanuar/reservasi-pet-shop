@@ -11,18 +11,18 @@
     @endif
     <div class="container-fluid pt-3">
         <div class="d-flex align-items-center justify-content-between mb-3">
-            <p class="font-weight-bold mb-0" style="font-size: 20px">Halaman Wilayah</p>
+            <p class="font-weight-bold mb-0" style="font-size: 20px">Halaman Paket Servis</p>
             <ol class="breadcrumb breadcrumb-transparent mb-0">
                 <li class="breadcrumb-item">
                     <a href="/dashboard">Dashboard</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Wilayah
+                <li class="breadcrumb-item active" aria-current="page">Paket Servis
                 </li>
             </ol>
         </div>
         <div class="w-100 p-2">
             <div class="text-right mb-2 pr-3">
-                <a href="/wilayah/tambah" class="btn btn-primary"><i class="fa fa-plus mr-1"></i><span
+                <a href="/data-paket/tambah" class="btn btn-primary"><i class="fa fa-plus mr-1"></i><span
                         class="font-weight-bold">Tambah</span></a>
             </div>
             <table id="table-data" class="display w-100 table table-bordered">
@@ -31,7 +31,10 @@
                     <th width="5%" class="text-center">#</th>
                     <th>Nama</th>
                     <th>Harga (Rp.)</th>
-                    <th width="12%" class="text-center">Action</th>
+                    <th>Layanan</th>
+                    <th>Tipe</th>
+                    <th>Deskripsi</th>
+                    <th width="15%" class="text-center">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -40,8 +43,20 @@
                         <td width="5%" class="text-center">{{ $loop->index + 1 }}</td>
                         <td>{{ $v->nama }}</td>
                         <td>{{ $v->harga }}</td>
+
+                        <td>
+                            @forelse($v->layanan as $vl)
+                                <div>- {{$vl->nama}}</div>
+                            @empty
+                                <span>-</span>
+                            @endforelse
+                        </td>
+                        <td>
+                            <span>{{ ucwords($v->tipe) }}</span>
+                        </td>
+                        <td>{{ $v->deskripsi }}</td>
                         <td class="text-center">
-                            <a href="/wilayah/edit/{{ $v->id }}" class="btn btn-sm btn-warning btn-edit"
+                            <a href="/data-paket/edit/{{ $v->id }}" class="btn btn-sm btn-warning btn-edit"
                                data-id="{{ $v->id }}"><i class="fa fa-edit"></i></a>
                             <a href="#" class="btn btn-sm btn-danger btn-delete" data-id="{{ $v->id }}"><i
                                     class="fa fa-trash"></i></a>
@@ -59,10 +74,11 @@
     <script src="{{ asset('/js/helper.js') }}"></script>
     <script type="text/javascript">
         function destroy(id) {
-            AjaxPost('/wilayah/delete', {id}, function () {
+            AjaxPost('/data-paket/delete', {id}, function () {
                 window.location.reload();
             });
         }
+
         $(document).ready(function () {
             $('#table-data').DataTable();
             $('.btn-delete').on('click', function (e) {

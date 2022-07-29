@@ -22,7 +22,13 @@ Route::get('/product/{id}/detail', [\App\Http\Controllers\Member\HomepageControl
 Route::get('/product/data', [\App\Http\Controllers\Member\ProductController::class, 'get_product_by_name']);
 Route::get('/product/slot', [\App\Http\Controllers\Admin\SlotController::class, 'getSlot']);
 Route::get('/product/slot/{type}', [\App\Http\Controllers\Admin\SlotController::class, 'getUsedSlot']);
-Route::post('/reservasi/checkout', [\App\Http\Controllers\Member\ReservasiController::class, 'reservasi']);
+
+Route::group(['prefix' => 'reservasi'], function (){
+    Route::get('/', [\App\Http\Controllers\Member\ReservasiController::class, 'index']);
+    Route::get('/{id}/detail', [\App\Http\Controllers\Member\ReservasiController::class, 'detail']);
+    Route::post('/checkout', [\App\Http\Controllers\Member\ReservasiController::class, 'reservasi']);
+});
+
 
 Route::group(['prefix' => 'pembayaran'], function (){
     Route::get('/{id}/detail', [\App\Http\Controllers\Member\PembayaranController::class, 'detail']);
@@ -49,25 +55,25 @@ Route::group(['prefix' => 'member'], function () {
     Route::post( '/delete', [\App\Http\Controllers\Admin\MemberController::class, 'destroy']);
 });
 
-Route::group(['prefix' => 'category'], function () {
-    Route::get( '/', [\App\Http\Controllers\Admin\CategoryController::class, 'index']);
-    Route::get( '/tambah', [\App\Http\Controllers\Admin\CategoryController::class, 'add_page']);
-    Route::post( '/create', [\App\Http\Controllers\Admin\CategoryController::class, 'create']);
-    Route::get( '/edit/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'edit_page']);
-    Route::post( '/patch', [\App\Http\Controllers\Admin\CategoryController::class, 'patch']);
-    Route::post( '/delete', [\App\Http\Controllers\Admin\CategoryController::class, 'destroy']);
+Route::group(['prefix' => 'layanan'], function () {
+    Route::get( '/', [\App\Http\Controllers\Admin\LayananController::class, 'index']);
+    Route::get( '/tambah', [\App\Http\Controllers\Admin\LayananController::class, 'add_page']);
+    Route::post( '/create', [\App\Http\Controllers\Admin\LayananController::class, 'create']);
+    Route::get( '/edit/{id}', [\App\Http\Controllers\Admin\LayananController::class, 'edit_page']);
+    Route::post( '/patch', [\App\Http\Controllers\Admin\LayananController::class, 'patch']);
+    Route::post( '/delete', [\App\Http\Controllers\Admin\LayananController::class, 'destroy']);
 });
 
-Route::group(['prefix' => 'product'], function () {
-    Route::get( '/', [\App\Http\Controllers\Admin\BarangController::class, 'index']);
-    Route::get( '/tambah', [\App\Http\Controllers\Admin\BarangController::class, 'add_page']);
-    Route::post( '/create', [\App\Http\Controllers\Admin\BarangController::class, 'create']);
-    Route::get( '/edit/{id}', [\App\Http\Controllers\Admin\BarangController::class, 'edit_page']);
-    Route::post( '/patch', [\App\Http\Controllers\Admin\BarangController::class, 'patch']);
-    Route::post( '/delete', [\App\Http\Controllers\Admin\BarangController::class, 'destroy']);
+Route::group(['prefix' => 'data-paket'], function () {
+    Route::get( '/', [\App\Http\Controllers\Admin\PaketController::class, 'index']);
+    Route::get( '/tambah', [\App\Http\Controllers\Admin\PaketController::class, 'add_page']);
+    Route::post( '/create', [\App\Http\Controllers\Admin\PaketController::class, 'create']);
+    Route::get( '/edit/{id}', [\App\Http\Controllers\Admin\PaketController::class, 'edit_page']);
+    Route::post( '/patch', [\App\Http\Controllers\Admin\PaketController::class, 'patch']);
+    Route::post( '/delete', [\App\Http\Controllers\Admin\PaketController::class, 'destroy']);
 });
 
-Route::group(['prefix' => 'kota'], function () {
+Route::group(['prefix' => 'wilayah'], function () {
     Route::get( '/', [\App\Http\Controllers\Admin\KotaController::class, 'index']);
     Route::get( '/tambah', [\App\Http\Controllers\Admin\KotaController::class, 'add_page']);
     Route::post( '/create', [\App\Http\Controllers\Admin\KotaController::class, 'create']);
@@ -76,14 +82,27 @@ Route::group(['prefix' => 'kota'], function () {
     Route::post( '/delete', [\App\Http\Controllers\Admin\KotaController::class, 'destroy']);
 });
 
-Route::group(['prefix' => 'ongkir'], function () {
-    Route::get( '/', [\App\Http\Controllers\Admin\OngkirController::class, 'index']);
-    Route::get( '/tambah', [\App\Http\Controllers\Admin\OngkirController::class, 'add_page']);
-    Route::post( '/create', [\App\Http\Controllers\Admin\OngkirController::class, 'create']);
-    Route::get( '/edit/{id}', [\App\Http\Controllers\Admin\OngkirController::class, 'edit_page']);
-    Route::post( '/patch', [\App\Http\Controllers\Admin\OngkirController::class, 'patch']);
-    Route::post( '/delete', [\App\Http\Controllers\Admin\OngkirController::class, 'destroy']);
+Route::group(['prefix' => 'kucing'], function () {
+    Route::get( '/', [\App\Http\Controllers\Admin\KucingController::class, 'index']);
+    Route::get( '/tambah', [\App\Http\Controllers\Admin\KucingController::class, 'add_page']);
+    Route::post( '/create', [\App\Http\Controllers\Admin\KucingController::class, 'create']);
+    Route::get( '/edit/{id}', [\App\Http\Controllers\Admin\KucingController::class, 'edit_page']);
+    Route::post( '/patch', [\App\Http\Controllers\Admin\KucingController::class, 'patch']);
+    Route::post( '/delete', [\App\Http\Controllers\Admin\KucingController::class, 'destroy']);
 });
+
+//Route::group(['prefix' => 'category'], function () {
+//    Route::get( '/', [\App\Http\Controllers\Admin\CategoryController::class, 'index']);
+//    Route::get( '/tambah', [\App\Http\Controllers\Admin\CategoryController::class, 'add_page']);
+//    Route::post( '/create', [\App\Http\Controllers\Admin\CategoryController::class, 'create']);
+//    Route::get( '/edit/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'edit_page']);
+//    Route::post( '/patch', [\App\Http\Controllers\Admin\CategoryController::class, 'patch']);
+//    Route::post( '/delete', [\App\Http\Controllers\Admin\CategoryController::class, 'destroy']);
+//});
+//
+
+
+
 
 Route::group(['prefix' => 'reservasi-baru'], function () {
     Route::get( '/', [\App\Http\Controllers\Admin\ReservasiController::class, 'index']);
@@ -93,6 +112,19 @@ Route::group(['prefix' => 'reservasi-baru'], function () {
 Route::group(['prefix' => 'reservasi-waiting-list'], function () {
     Route::get( '/', [\App\Http\Controllers\Admin\ReservasiController::class, 'waiting_list']);
     Route::match(['post', 'get'], '/{id}/detail', [\App\Http\Controllers\Admin\ReservasiController::class, 'detail_waiting_list']);
+});
+
+Route::group(['prefix' => 'reservasi-ongoing'], function () {
+    Route::get( '/', [\App\Http\Controllers\Admin\ReservasiController::class, 'ongoing']);
+    Route::match(['post', 'get'], '/{id}/detail', [\App\Http\Controllers\Admin\ReservasiController::class, 'detail_ongoing']);
+    Route::post( '/kegiatan', [\App\Http\Controllers\Admin\ReservasiController::class, 'kegiatan_ongoing']);
+    Route::post( '/kegiatan/delete', [\App\Http\Controllers\Admin\ReservasiController::class, 'delete_kegiatan_ongoing']);
+});
+
+Route::group(['prefix' => 'reservasi-selesai'], function () {
+    Route::get( '/', [\App\Http\Controllers\Admin\ReservasiController::class, 'selesai']);
+    Route::match(['post', 'get'], '/{id}/detail', [\App\Http\Controllers\Admin\ReservasiController::class, 'detail_selesai']);
+    Route::get('/{id}/cetak', [\App\Http\Controllers\Admin\ReservasiController::class, 'cetak_detail_selesai']);
 });
 
 Route::group(['prefix' => 'pesanan'], function () {

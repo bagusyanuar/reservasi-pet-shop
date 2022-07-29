@@ -23,7 +23,7 @@
                     <a href="/dashboard">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="/kota">Kota</a>
+                    <a href="/wilayah">Wilayah</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Tambah
                 </li>
@@ -34,12 +34,17 @@
                 <div class="col-lg-5 col-md-6 col-sm-11">
                     <div class="card">
                         <div class="card-body">
-                            <form method="post" action="/kota/create">
+                            <form method="post" action="/wilayah/create">
                                 @csrf
                                 <div class="w-100 mb-1">
-                                    <label for="nama" class="form-label">Nama Kota</label>
-                                    <input type="text" class="form-control" id="nama" placeholder="Nama Kota"
+                                    <label for="nama" class="form-label">Nama Wilayah</label>
+                                    <input type="text" class="form-control" id="nama" placeholder="Nama Wilayah"
                                            name="nama">
+                                </div>
+                                <div class="w-100 mb-1">
+                                    <label for="harga" class="form-label">Harga (Rp.)</label>
+                                    <input type="number" class="form-control" id="harga" placeholder=""
+                                           name="harga" value="0">
                                 </div>
                                 <div class="w-100 mb-2 mt-3 text-right">
                                     <button type="submit" class="btn btn-primary">Simpan</button>

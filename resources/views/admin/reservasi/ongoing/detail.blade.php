@@ -1,24 +1,35 @@
-@extends('member.layout')
+@extends('admin.layout')
+
+@section('css')
+@endsection
 
 @section('content')
-    <div id="overlay-loading">
-        <div class="d-flex justify-content-center align-items-center" id="overlay-loading-child">
-            <p class="font-weight-bold color-white">Sedang Menambah Keranjang....</p>
+    @if (\Illuminate\Support\Facades\Session::has('success'))
+        <script>
+            Swal.fire("Berhasil!", '{{\Illuminate\Support\Facades\Session::get('success')}}', "success")
+        </script>
+    @endif
+
+    @if (\Illuminate\Support\Facades\Session::has('failed'))
+        <script>
+            Swal.fire("Gagal", '{{\Illuminate\Support\Facades\Session::get('failed')}}', "error")
+        </script>
+    @endif
+    <div class="container-fluid pt-3">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+            <p class="font-weight-bold mb-0" style="font-size: 20px">Halaman Detail Reservasi Ongoing</p>
+            <ol class="breadcrumb breadcrumb-transparent mb-0">
+                <li class="breadcrumb-item">
+                    <a href="/dashboard">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="/reservasi-ongoing">Reservasi Ongoing</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">DetailReservasi Ongoing
+                </li>
+            </ol>
         </div>
-    </div>
-    <div class="container-fluid mt-2" style="padding-left: 50px; padding-right: 50px; padding-top: 10px;">
-        <ol class="breadcrumb breadcrumb-transparent mb-2">
-            <li class="breadcrumb-item">
-                <a href="/" class="category-menu">Beranda</a>
-            </li>
-            <li class="breadcrumb-item">
-                <a href="/reservasi" class="category-menu">Reservasi</a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">{{ $data->no_transaksi }}
-            </li>
-        </ol>
-        <hr>
-        <div class="mt-5" style="min-height: 350px;">
+        <div class="w-100 p-2">
             <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <div class="card">
@@ -34,18 +45,18 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-4 col-md-6">
-                                    <span class="font-weight-bold">Tipe Reservasi</span>
+                                    <span class="font-weight-bold">Customer</span>
                                 </div>
                                 <div class="col-lg-8 col-md-6">
-                                    <span class="font-weight-bold">: {{ ucwords($data->tipe) }}</span>
+                                    <span class="font-weight-bold">: {{ $data->user->member->nama }}</span>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-4 col-md-6">
-                                    <span class="font-weight-bold">Status Reservasi</span>
+                                    <span class="font-weight-bold">Tipe Reservasi</span>
                                 </div>
                                 <div class="col-lg-8 col-md-6">
-                                    <span class="font-weight-bold">: {{ ucwords($data->status) }}</span>
+                                    <span class="font-weight-bold">: {{ ucwords($data->tipe) }}</span>
                                 </div>
                             </div>
                         </div>
@@ -166,7 +177,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-5 col-md-6">
+                        <div class="col-lg-6 col-md-6">
                             <div class="card">
                                 <div class="card-body">
                                     <p class="font-weight-bold">Data Kucing</p>
@@ -278,73 +289,127 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-7 col-md-6">
-                            <p class="font-weight-bold">Data Kegiatan Kucing</p>
-                            <table id="table-data-kegiatan" class="display w-100 table table-bordered">
-                                <thead>
-                                <tr>
-                                    <th width="5%" class="text-center">#</th>
-                                    <th width="17%">Foto</th>
-                                    <th>Waktu</th>
-                                    <th width="25%">Kegiatan</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($data->kegiatan as $k)
-                                    <tr>
-                                        <td width="5%" class="text-center">{{ $loop->index + 1 }}</td>
-                                        <td>
-                                            <a target="_blank"
-                                               href="{{ asset('assets/kegiatan')."/".$k->foto }}">
-                                                <img
-                                                    src="{{ asset('assets/kegiatan')."/".$k->foto }}"
-                                                    alt="Gambar Kegiatan"
-                                                    style="width: 75px; height: 80px; object-fit: cover"/>
-                                            </a>
-                                        </td>
-                                        <td>{{ $k->waktu }}</td>
-                                        <td>{{ $k->kegiatan}}</td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="font-weight-bold">Kegiatan Kucing</p>
+                                    <form method="post" action="/reservasi-ongoing/kegiatan" enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="hidden" name="id-reservasi" value="{{ $data->id }}">
+                                        <div class="w-100 mb-1">
+                                            <label for="jam" class="form-label">Jam</label>
+                                            <input type="datetime-local" class="form-control" id="jam"
+                                                   name="jam" value="{{ date('H:i:s') }}">
+                                        </div>
+                                        <div class="w-100 mb-1">
+                                            <label for="kegiatan" class="form-label">Kegiatan</label>
+                                            <input type="text" class="form-control" id="kegiatan"
+                                                   name="kegiatan">
+                                        </div>
+                                        <div class="w-100 mb-1">
+                                            <label for="foto" class="form-label">Gambar Foto</label>
+                                            <input type="file" class="form-control-file" id="foto"
+                                                   placeholder="Gambar Bukti"
+                                                   name="foto" required>
+                                        </div>
+                                        <hr>
+                                        <button type="submit" class="btn btn-primary w-100 mt-2" id="btn-add">
+                                            <i class="fa fa-plus mr-2"></i>Tambah
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <hr>
-
+                    <p class="font-weight-bold">Data Kegiatan Kucing</p>
+                    <table id="table-data-kegiatan" class="display w-100 table table-bordered">
+                        <thead>
+                        <tr>
+                            <th width="5%" class="text-center">#</th>
+                            <th width="17%">Foto</th>
+                            <th>Waktu</th>
+                            <th width="25%">Kegiatan</th>
+                            <th width="12%" class="text-center">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($data->kegiatan as $k)
+                            <tr>
+                                <td width="5%" class="text-center">{{ $loop->index + 1 }}</td>
+                                <td>
+                                    <a target="_blank"
+                                       href="{{ asset('assets/kegiatan')."/".$k->foto }}">
+                                        <img
+                                            src="{{ asset('assets/kegiatan')."/".$k->foto }}"
+                                            alt="Gambar Kegiatan"
+                                            style="width: 75px; height: 80px; object-fit: cover"/>
+                                    </a>
+                                </td>
+                                <td>{{ $k->waktu }}</td>
+                                <td>{{ $k->kegiatan}}</td>
+                                <td class="text-center">
+                                    <a href="#"
+                                       class="btn btn-sm btn-danger btn-delete"
+                                       data-id="{{ $k->id }}"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <hr>
-            <div class="row">
-                <div class="col-lg-8 col-md-6"></div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="d-flex justify-content-between align-items-center mb-0">
-                        <span class="w-50 font-weight-bold">Sub Total</span>
-                        <span class="w-50 text-right font-weight-bold" id="lbl-sub-total"
-                        >Rp.  {{ number_format($data->sub_total, 0, ',', '.')  }}</span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <span class="w-50 font-weight-bold">Biaya Transport</span>
-                        <span class="w-50 text-right font-weight-bold"
-                              id="lbl-ongkir">Rp. {{ number_format($data->transport, 0, ',', '.') }}</span>
-                    </div>
-                    <hr>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="w-50 font-weight-bold">Total</span>
-                        <span class="w-50 text-right font-weight-bold"
-                              id="lbl-total">Rp. {{  number_format($data->total, 0, ',', '.') }}</span>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-8">
+
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <form method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-success w-100" id="btn-submit">
+                                    <i class="fa fa-save mr-2"></i>Selesai
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <hr>
     </div>
+
 @endsection
 
 @section('js')
-    <script>
+    <script src="{{ asset('/js/helper.js') }}"></script>
+    <script type="text/javascript">
+        function destroy(id) {
+            AjaxPost('/reservasi-ongoing/kegiatan/delete', {id}, function () {
+                window.location.reload();
+            });
+        }
         $(document).ready(function () {
-            $('#table-data').DataTable();
+            $('#table-data-kegiatan').DataTable();
+            $('#status').on('change', function () {
+                let val = this.value;
+                if (val === 'tolak') {
+                    $('#reason').removeClass('d-none')
+                    $('#reason').addClass('d-block')
+                } else {
+                    $('#reason').removeClass('d-block')
+                    $('#reason').addClass('d-none')
+                }
+            })
+
+            $('.btn-delete').on('click', function (e) {
+                e.preventDefault();
+                let id = this.dataset.id;
+                AlertConfirm('Apakah anda yakin menghapus kegiatan?', 'Data yang dihapus tidak dapat dikembalikan!', function () {
+                    destroy(id);
+                })
+            });
         });
     </script>
 @endsection

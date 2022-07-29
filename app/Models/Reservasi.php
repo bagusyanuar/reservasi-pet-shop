@@ -47,4 +47,9 @@ class Reservasi extends Model
     {
         return $this->belongsTo(Paket::class, 'paket_id');
     }
+
+    public function kegiatan()
+    {
+        return $this->hasMany(Kegiatan::class, 'reservasi_id');
+    }
 }

@@ -18,7 +18,7 @@
                 <a href="/" class="category-menu">Beranda</a>
             </li>
             <li class="breadcrumb-item">
-                <a href="/transaksi" class="category-menu">Transaksi</a>
+                <a href="/reservasi" class="category-menu">Reservasi</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">{{ $data->no_transaksi }}
             </li>
@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="w-100 mb-1">
                                         <label for="bukti" class="form-label">Gambar Bukti Transfer</label>
-                                        <input type="file" class="form-control-file" id="c"
+                                        <input type="file" class="form-control-file" id="bukti"
                                                placeholder="Gambar Bukti"
                                                name="bukti" required>
                                     </div>
