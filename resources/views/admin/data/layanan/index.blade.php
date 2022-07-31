@@ -30,7 +30,6 @@
                 <tr>
                     <th width="5%" class="text-center">#</th>
                     <th>Nama</th>
-                    <th>Harga (Rp.)</th>
                     <th width="20%" class="text-center">Action</th>
                 </tr>
                 </thead>
@@ -39,7 +38,6 @@
                     <tr>
                         <td width="5%" class="text-center">{{ $loop->index + 1 }}</td>
                         <td>{{ $v->nama }}</td>
-                        <td>{{ $v->harga }}</td>
                         <td class="text-center">
                             <a href="/layanan/edit/{{ $v->id }}" class="btn btn-sm btn-warning btn-edit"
                                data-id="{{ $v->id }}"><i class="fa fa-edit"></i></a>
