@@ -177,4 +177,32 @@ class ReservasiController extends CustomController
             'data' => $data
         ]);
     }
+    public function tolak()
+    {
+        $data_grooming = Reservasi::with('user.member', 'paket', 'penitipan', 'grooming')
+            ->where('status', '=', 'tolak')
+            ->where('tipe', '=', 'grooming')
+            ->get();
+        $data_penitipan = Reservasi::with('user.member', 'paket', 'penitipan', 'grooming')
+            ->where('status', '=', 'tolak')
+            ->where('tipe', '=', 'penitipan')
+            ->get();
+        return view('admin.reservasi.tolak.index')->with(['data_grooming' => $data_grooming, 'data_penitipan' => $data_penitipan]);
+    }
+
+    public function detail_tolak($id)
+    {
+        $data = Reservasi::with(['user.member', 'grooming.kucing', 'penitipan.kucing', 'kegiatan', 'payment'])
+            ->findOrFail($id);
+        return view('admin.reservasi.tolak.detail')->with(['data' => $data]);
+    }
+
+    public function cetak_detail_tolak($id)
+    {
+        $data = Reservasi::with(['user.member', 'grooming.kucing', 'penitipan.kucing', 'kegiatan'])
+            ->findOrFail($id);
+        return $this->convertToPdf('admin.reservasi.tolak.cetak', [
+            'data' => $data
+        ]);
+    }
 }

@@ -135,7 +135,7 @@
                     <span>08956087654324</span>
                 </div>
             </div>
-
+            <p class="font-weight-bold mb-0" style="font-size: 16px; color: white">Melayani antar jemput sekitar solo raya</p>
         </div>
 
     </div>

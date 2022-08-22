@@ -128,6 +128,12 @@ Route::group(['prefix' => 'reservasi-selesai'], function () {
     Route::get('/{id}/cetak', [\App\Http\Controllers\Admin\ReservasiController::class, 'cetak_detail_selesai']);
 });
 
+Route::group(['prefix' => 'reservasi-tolak'], function () {
+    Route::get('/', [\App\Http\Controllers\Admin\ReservasiController::class, 'tolak']);
+    Route::match(['post', 'get'], '/{id}/detail', [\App\Http\Controllers\Admin\ReservasiController::class, 'detail_tolak']);
+    Route::get('/{id}/cetak', [\App\Http\Controllers\Admin\ReservasiController::class, 'cetak_detail_tolak']);
+});
+
 //Route::group(['prefix' => 'pesanan'], function () {
 //    Route::get('/', [\App\Http\Controllers\Admin\PaymentController::class, 'index']);
 //    Route::match(['post', 'get'], '/{id}/detail', [\App\Http\Controllers\Admin\PaymentController::class, 'detail']);

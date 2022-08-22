@@ -24,8 +24,11 @@
     </style>
 </head>
 <body>
-<div class="text-center f-bold report-title">LAPORAN RESERVASI OMO CATS</div>
-<div class="text-center">Periode Laporan {{ $tgl1 }} - {{ $tgl2 }} </div>
+<div style="position: relative">
+    <img src="{{ public_path('assets/icon/logo-laporan.png') }}" height="50" style="position: absolute; top: 0; left: 0">
+    <div class="text-center f-bold report-title">LAPORAN RESERVASI OMO CATS</div>
+    <div class="text-center">Periode Laporan {{ $tgl1 }} - {{ $tgl2 }} </div>
+</div>
 <hr>
 <table id="my-table" class="table display">
     <thead>

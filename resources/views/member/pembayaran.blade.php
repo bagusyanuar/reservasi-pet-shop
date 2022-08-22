@@ -54,9 +54,9 @@
                                         <label for="bank">Pembayaran Bank</label>
                                         <select class="form-control" id="bank" name="bank" required>
                                             <option value="">--pilih bank--</option>
-                                            <option value="BRI">BRI (9128381239)</option>
-                                            <option value="BCA">BCA (9123892322)</option>
-                                            <option value="MANDIRI">MANDIRI (8219823922)</option>
+                                            <option value="BRI">BRI (9128381239) an Yusnia Fajar T</option>
+                                            <option value="BCA">BCA (3930671109) an Yusnia Fajar T</option>
+                                            <option value="MANDIRI">MANDIRI (8219823922) an Yusnia Fajar T</option>
                                         </select>
                                     </div>
                                     <div class="w-100 mb-1">

@@ -41,11 +41,11 @@
                                     <input type="text" class="form-control" id="nama" placeholder="Nama Layanan"
                                            name="nama">
                                 </div>
-                                <div class="w-100 mb-1">
-                                    <label for="harga" class="form-label">Harga Layanan</label>
-                                    <input type="number" class="form-control" id="harga" placeholder="Harga Layanan"
-                                           name="harga" value="0">
-                                </div>
+{{--                                <div class="w-100 mb-1">--}}
+{{--                                    <label for="harga" class="form-label">Harga Layanan</label>--}}
+{{--                                    <input type="number" class="form-control" id="harga" placeholder="Harga Layanan"--}}
+{{--                                           name="harga" value="0">--}}
+{{--                                </div>--}}
                                 <div class="w-100 mb-2 mt-3 text-right">
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                 </div>

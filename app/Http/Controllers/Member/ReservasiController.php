@@ -77,7 +77,7 @@ class ReservasiController extends CustomController
                     'reservasi_id' => $reservasi->id,
                     'kucing_id' => $this->postField('kucing'),
                     'transport' => $transport > 0 ? 1 : 0,
-                    'alamat' => $this->postField('alamat'),
+                    'alamat' => $transport > 0 ? $this->postField('alamat') : '-',
                     'catatan' => $this->postField('catatan')
                 ];
                 ReservasiGrooming::create($data_grooming);
@@ -88,7 +88,7 @@ class ReservasiController extends CustomController
                     'reservasi_id' => $reservasi->id,
                     'kucing_id' => $this->postField('kucing'),
                     'transport' => $transport > 0 ? 1 : 0,
-                    'alamat' => $this->postField('alamat'),
+                    'alamat' => $transport > 0 ? $this->postField('alamat') : '-',
                     'catatan' => $this->postField('catatan')
                 ];
                 ReservasiPenitipan::create($data_penitipan);

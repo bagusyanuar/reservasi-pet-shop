@@ -156,6 +156,13 @@
                                     <p>Selesai</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="/reservasi-tolak"
+                                   class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
+                                    <p>Di Tolak</p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item has-treeview">

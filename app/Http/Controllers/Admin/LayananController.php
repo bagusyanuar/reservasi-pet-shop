@@ -30,7 +30,7 @@ class LayananController extends CustomController
         try {
             $data = [
                 'nama' => $this->postField('nama'),
-                'harga' => $this->postField('harga'),
+//                'harga' => $this->postField('harga'),
             ];
             Layanan::create($data);
             return redirect()->back()->with(['success' => 'Berhasil Menambahkan Data...']);
@@ -52,7 +52,7 @@ class LayananController extends CustomController
             $layanan = Layanan::find($id);
             $data = [
                 'nama' => $this->postField('nama'),
-                'harga' => $this->postField('harga'),
+//                'harga' => $this->postField('harga'),
             ];
 
             $layanan->update($data);

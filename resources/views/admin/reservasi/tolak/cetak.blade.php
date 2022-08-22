@@ -12,46 +12,19 @@
             font-size: 14px;
             font-weight: bolder;
         }
-
         .f-bold {
             font-weight: bold;
         }
-
-        .footer {
+        .footer{
             position: fixed;
             bottom: 0cm;
             right: 0cm;
             height: 2cm;
         }
-
-        .w-50 {
-            width: 50%;
-        }
-
-        .font-weight-bold {
-            font-weight: bold;
-        }
-
-        .text-right {
-            text-align: right;
-        }
-
-        .d-flex {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
     </style>
 </head>
 <body>
-<div style="position: relative">
-    <img src="{{ public_path('assets/icon/logo-laporan.png') }}" height="50" style="position: absolute; top: 0; left: 0">
-    <div class="text-center f-bold report-title">NOTA RESERVASI OMO CATS</div>
-    <div class="text-center">
-        <span>Jl. Adi Sumarmo No. 18, Manahan, Surakarta</span>
-    </div>
-</div>
-
+<div class="text-center f-bold report-title">BUKTI DATA RESERVASI OMO CATS</div>
 <hr>
 <div class="row">
     <div class="col-xs-2 f-bold">No. Transaksi</div>
@@ -122,33 +95,35 @@
         <div class="col-xs-3">: {{ $data->grooming->kucing->usia }} bulan</div>
     </div>
 @endif
-
+<hr>
+<p class="f-bold">Detail Kegiatan</p>
+<table id="my-table" class="table display">
+    <thead>
+    <tr>
+        <th width="5%" class="text-center">#</th>
+        <th width="25%">Waktu</th>
+        <th>Kegiatan</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach($data->kegiatan as $v)
+        <tr>
+            <td width="5%" class="text-center">{{ $loop->index + 1 }}</td>
+            <td>{{ $v->waktu }}</td>
+            <td>{{ $v->kegiatan }}</td>
+        </tr>
+    @endforeach
+    </tbody>
+</table>
 <hr>
 <div class="row">
-    <div class="col-xs-7"></div>
-    <div class="col-xs-2">
-        <div class="f-bold">Sub Total</div>
-    </div>
-    <div class="col-xs-2">
-        <div class="f-bold">: Rp. {{ number_format($data->sub_total, 0, ',', '.') }}</div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-xs-7"></div>
-    <div class="col-xs-2">
-        <div class="f-bold">Biaya Transport</div>
-    </div>
-    <div class="col-xs-2">
-        <div class="f-bold">: Rp. {{ number_format($data->transport, 0, ',', '.') }}</div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-xs-7"></div>
-    <div class="col-xs-2">
-        <div class="f-bold">Total</div>
-    </div>
-    <div class="col-xs-2">
-        <div class="f-bold">: Rp. {{ number_format($data->total, 0, ',', '.') }}</div>
+    <div class="col-xs-8"></div>
+    <div class="col-xs-3">
+        <div class="text-center">Admin</div>
+        <br>
+        <br>
+        <br>
+        <div class="text-center">(..............)</div>
     </div>
 </div>
 </body>

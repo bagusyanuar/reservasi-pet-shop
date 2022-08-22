@@ -33,7 +33,7 @@ class SlotController extends CustomController
             if($type === 'grooming') {
                 $grooming = ReservasiGrooming::with('reservasi')
                     ->whereHas('reservasi', function ($query){
-                        return $query->where('status', '=', 'ongoing');
+                        return $query->where('status', '=', 'ongoing')->orWhere('status', '=', 'terdaftar');
                     })
                     ->where('tanggal', '=', $tanggal)
                     ->get();
@@ -41,7 +41,7 @@ class SlotController extends CustomController
             } else {
                 $penitipan = ReservasiPenitipan::with('reservasi')
                     ->whereHas('reservasi', function ($query){
-                        return $query->where('status', '=', 'ongoing');
+                        return $query->where('status', '=', 'ongoing')->orWhere('status', '=', 'terdaftar');
                     })
                     ->whereRaw('? between check_in and check_out', [$tanggal])
                     ->get();
